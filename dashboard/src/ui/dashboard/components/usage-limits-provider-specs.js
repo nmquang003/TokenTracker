@@ -138,10 +138,10 @@ export const PROVIDER_LIMIT_SPECS = {
   antigravity: {
     windows(data) {
       return [
-        { key: "claude-weekly", labelKey: "limits.label.antigravity_claude_weekly", window: data.primary_window },
-        { key: "claude-5h", labelKey: "limits.label.antigravity_claude_5h", window: data.secondary_window },
-        { key: "gemini-weekly", labelKey: "limits.label.antigravity_gemini_weekly", window: data.tertiary_window },
-        { key: "gemini-5h", labelKey: "limits.label.antigravity_gemini_5h", window: data.quaternary_window },
+        { key: "gemini-5h", labelKey: "limits.label.antigravity_gemini_5h", window: data.quaternary_window, windowSeconds: 5 * 3600 },
+        { key: "gemini-weekly", labelKey: "limits.label.antigravity_gemini_weekly", window: data.tertiary_window, windowSeconds: 7 * 86400 },
+        { key: "claude-5h", labelKey: "limits.label.antigravity_claude_5h", window: data.secondary_window, windowSeconds: 5 * 3600 },
+        { key: "claude-weekly", labelKey: "limits.label.antigravity_claude_weekly", window: data.primary_window, windowSeconds: 7 * 86400 },
       ];
     },
   },

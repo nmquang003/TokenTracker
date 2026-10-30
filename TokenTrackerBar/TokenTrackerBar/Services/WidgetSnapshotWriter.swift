@@ -425,17 +425,15 @@ enum WidgetSnapshotWriter {
                                          fraction: w.usedPercent / 100.0,
                                          resetsAt: parseISO(w.resetAt)))
             }
-            if limits.antigravity.quaternaryWindow == nil && limits.antigravity.tertiaryWindow == nil {
-                if let w = limits.antigravity.secondaryWindow {
-                    out.append(LimitProvider(source: "antigravity", label: "Cl · 5h",
-                                             fraction: w.usedPercent / 100.0,
-                                             resetsAt: parseISO(w.resetAt)))
-                }
-                if let w = limits.antigravity.primaryWindow {
-                    out.append(LimitProvider(source: "antigravity", label: "Cl · weekly",
-                                             fraction: w.usedPercent / 100.0,
-                                             resetsAt: parseISO(w.resetAt)))
-                }
+            if limits.antigravity.quaternaryWindow == nil, let w = limits.antigravity.secondaryWindow {
+                out.append(LimitProvider(source: "antigravity", label: "Cl · 5h",
+                                         fraction: w.usedPercent / 100.0,
+                                         resetsAt: parseISO(w.resetAt)))
+            }
+            if limits.antigravity.tertiaryWindow == nil, let w = limits.antigravity.primaryWindow {
+                out.append(LimitProvider(source: "antigravity", label: "Cl · weekly",
+                                         fraction: w.usedPercent / 100.0,
+                                         resetsAt: parseISO(w.resetAt)))
             }
         }
 

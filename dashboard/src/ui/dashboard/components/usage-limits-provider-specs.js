@@ -136,12 +136,13 @@ export const PROVIDER_LIMIT_SPECS = {
     },
   },
   antigravity: {
+    /** Limit rows for Antigravity, ordered Gm 5h → Gm 7d → Cl 5h → Cl 7d with server-supplied window durations. */
     windows(data) {
       return [
-        { key: "gemini-5h", labelKey: "limits.label.antigravity_gemini_5h", window: data.quaternary_window, windowSeconds: 5 * 3600 },
-        { key: "gemini-weekly", labelKey: "limits.label.antigravity_gemini_weekly", window: data.tertiary_window, windowSeconds: 7 * 86400 },
-        { key: "claude-5h", labelKey: "limits.label.antigravity_claude_5h", window: data.secondary_window, windowSeconds: 5 * 3600 },
-        { key: "claude-weekly", labelKey: "limits.label.antigravity_claude_weekly", window: data.primary_window, windowSeconds: 7 * 86400 },
+        { key: "gemini-5h", labelKey: "limits.label.antigravity_gemini_5h", window: data.quaternary_window, windowSecondsField: "limit_window_seconds" },
+        { key: "gemini-weekly", labelKey: "limits.label.antigravity_gemini_weekly", window: data.tertiary_window, windowSecondsField: "limit_window_seconds" },
+        { key: "claude-5h", labelKey: "limits.label.antigravity_claude_5h", window: data.secondary_window, windowSecondsField: "limit_window_seconds" },
+        { key: "claude-weekly", labelKey: "limits.label.antigravity_claude_weekly", window: data.primary_window, windowSecondsField: "limit_window_seconds" },
       ];
     },
   },

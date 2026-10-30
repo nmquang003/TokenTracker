@@ -288,6 +288,7 @@ enum WidgetSnapshotWriter {
     // optional windows each. We flatten them into a uniform list so the
     // widget can render generically.
 
+    /// Flattens per-provider rate-limit structures into a uniform list of `LimitProvider` items for the widget.
     private static func limitProviders(from limits: UsageLimitsResponse?) -> [LimitProvider] {
         guard let limits else { return [] }
         // Honor the user's Limits Display visibility preferences — the

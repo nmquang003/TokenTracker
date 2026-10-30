@@ -3629,6 +3629,9 @@ describe("normalizeAntigravityResponse", () => {
     assert.equal(result.account_plan, null);
     assert.equal(result.primary_window.used_percent, 50);
     assert.equal(result.primary_window.reset_at, "2024-04-05T10:00:00.000Z");
+    assert.equal(result.primary_window.limit_window_seconds, undefined);
+    assert.equal(result.tertiary_window, null);
+    assert.equal(result.quaternary_window, null);
   });
 });
 
@@ -3636,9 +3639,13 @@ describe("normalizeAntigravityQuotaSummary", () => {
   it("accepts the Cloud Code HTTP payload with top-level groups", () => {
     const result = normalizeAntigravityQuotaSummary(antigravityQuotaSummaryPayload());
     assert.equal(result.primary_window.used_percent, 42);
+    assert.equal(result.primary_window.limit_window_seconds, 604800);
     assert.equal(result.secondary_window.used_percent, 18);
+    assert.equal(result.secondary_window.limit_window_seconds, 18000);
     assert.equal(result.tertiary_window.used_percent, 60);
+    assert.equal(result.tertiary_window.limit_window_seconds, 604800);
     assert.equal(result.quaternary_window.used_percent, 10);
+    assert.equal(result.quaternary_window.limit_window_seconds, 18000);
     assert.equal(result.primary_window.reset_at, "2026-09-07T00:00:00.000Z");
   });
 

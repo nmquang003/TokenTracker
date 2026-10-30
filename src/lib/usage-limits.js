@@ -3054,9 +3054,12 @@ function parseAntigravityModelConfigs(configs) {
     .filter(Boolean);
 }
 
+/**
+ * Classifies an Antigravity model config into its quota family (`claude` for Claude/GPT-OSS third-party models, `gemini_pro`, `gemini_flash`, or `unknown`).
+ */
 function antigravityFamily(model) {
   const text = `${model?.label || ""} ${model?.model_id || ""}`.toLowerCase();
-  if (text.includes("claude")) return "claude";
+  if (text.includes("claude") || text.includes("gpt-oss")) return "claude";
   if (text.includes("gemini") && text.includes("pro")) return "gemini_pro";
   if (text.includes("gemini") && text.includes("flash")) return "gemini_flash";
   return "unknown";

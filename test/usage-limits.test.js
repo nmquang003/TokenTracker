@@ -3633,6 +3633,33 @@ describe("normalizeAntigravityResponse", () => {
     assert.equal(result.tertiary_window, null);
     assert.equal(result.quaternary_window, null);
   });
+
+  it("preserves GPT-OSS quota in primary_window when Gemini models are present without Claude", () => {
+    const result = normalizeAntigravityResponse({
+      code: "ok",
+      clientModelConfigs: [
+        {
+          label: "GPT-OSS 120B",
+          modelOrAlias: { model: "gpt-oss-120b" },
+          quotaInfo: {
+            remainingFraction: 0.75,
+            resetTime: "1712311200",
+          },
+        },
+        {
+          label: "Gemini 2.5 Pro",
+          modelOrAlias: { model: "gemini-2.5-pro" },
+          quotaInfo: {
+            remainingFraction: 0.4,
+            resetTime: "1712311200",
+          },
+        },
+      ],
+    }, { fallbackToConfigs: true });
+
+    assert.equal(result.primary_window.used_percent, 25);
+    assert.equal(result.tertiary_window.used_percent, 60);
+  });
 });
 
 describe("normalizeAntigravityQuotaSummary", () => {
